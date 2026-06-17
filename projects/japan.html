@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japan Trip</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #0f172a;
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display { font-family: 'Noto Serif JP', serif; }
+
+        /* Background blobs */
+        .blob-1 {
+            position: fixed; top: -5rem; right: -5rem;
+            width: 24rem; height: 24rem;
+            background: rgba(188, 0, 45, 0.08);
+            border-radius: 9999px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        .blob-2 {
+            position: fixed; top: 30%; left: -5rem;
+            width: 20rem; height: 20rem;
+            background: rgba(255, 183, 197, 0.08);
+            border-radius: 9999px;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        /* Card */
+        .cd-card {
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .cd-card:hover {
+            border-color: rgba(188, 0, 45, 0.5);
+            background: rgba(30, 41, 59, 1);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: rgba(188, 0, 45, 0.15);
+            border: 1px solid rgba(188, 0, 45, 0.25);
+            border-radius: 9999px;
+            color: #FFB7C5;
+            font-size: 0.875rem;
+        }
+
+        /* Progress track */
+        .progress-track {
+            height: 0.5rem;
+            background: #1e293b;
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #BC002D, #FFB7C5);
+            border-radius: 9999px;
+            transition: width 1s;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(188,0,45,0.15); }
+            50% { box-shadow: 0 0 30px rgba(188,0,45,0.3); }
+        }
+        @keyframes petalFall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0.5; }
+            100% { transform: translateY(105vh) rotate(720deg) translateX(80px); opacity: 0; }
+        }
+        .anim-float { animation: float 5s ease-in-out infinite; }
+        .anim-fade { animation: fadeUp 0.7s ease-out both; }
+        .anim-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+        .petal {
+            position: fixed;
+            background: #FFB7C5;
+            border-radius: 50% 0 50% 0;
+            pointer-events: none;
+            animation: petalFall linear infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #FFB7C5, #ffffff, #FFB7C5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen overflow-x-hidden m-0">
+
+    <!-- Blobs -->
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+
+    <!-- Petals -->
+    <div id="petals" class="fixed inset-0 pointer-events-none" style="z-index:0;"></div>
+
+    <!-- Content -->
+    <main class="relative flex flex-col items-center justify-center min-h-screen px-4 py-12" style="z-index:1;">
+
+        <!-- Torii icon -->
+        <div class="anim-float mb-6">
+            <svg class="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 100 100" fill="#BC002D">
+                <rect x="5" y="20" width="90" height="8" rx="2"/>
+                <rect x="10" y="32" width="80" height="5" rx="1"/>
+                <rect x="20" y="37" width="7" height="45" rx="2"/>
+                <rect x="73" y="37" width="7" height="45" rx="2"/>
+                <rect x="15" y="75" width="22" height="5" rx="1"/>
+                <rect x="63" y="75" width="22" height="5" rx="1"/>
+            </svg>
+        </div>
+
+        <!-- Title -->
+        <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold text-center mb-3 anim-fade" style="animation-delay:0.1s;">
+            <span class="gradient-text">Japan 2026 Trip</span>
+        </h1>
+
+        <!-- Date line -->
+        <p class="text-slate-400 text-base md:text-lg mb-3 anim-fade" style="animation-delay:0.25s;">
+            3 September 2026 &middot; 1:00 PM MYT
+        </p>
+
+        <!-- Badges -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10 anim-fade" style="animation-delay:0.35s;">
+            <span class="badge">🗼 Tokyo</span>
+            <span class="badge">🏯 Kyoto</span>
+            <span class="badge">🍜 Osaka</span>
+        </div>
+
+        <!-- Countdown grid -->
+        <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 w-full max-w-2xl anim-fade" style="animation-delay:0.45s;">
+            <div class="cd-card anim-glow">
+                <span id="days" class="font-display text-4xl md:text-6xl font-bold block">--</span>
+                <span class="text-slate-400 text-xs uppercase tracking-widest block mt-2">Days</span>
+            </div>
+            <div class="cd-card anim-glow" style="animation-delay:0.4s;">
+                <span id="hours" class="font-display text-4xl md:text-6xl font-bold block">--</span>
+                <span class="text-slate-400 text-xs uppercase tracking-widest block mt-2">Hours</span>
+            </div>
+            <div class="cd-card anim-glow" style="animation-delay:0.8s;">
+                <span id="minutes" class="font-display text-4xl md:text-6xl font-bold block">--</span>
+                <span class="text-slate-400 text-xs uppercase tracking-widest block mt-2">Minutes</span>
+            </div>
+            <div class="cd-card anim-glow" style="animation-delay:1.2s;">
+                <span id="seconds" class="font-display text-4xl md:text-6xl font-bold block">--</span>
+                <span class="text-slate-400 text-xs uppercase tracking-widest block mt-2">Seconds</span>
+            </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="w-full max-w-2xl mt-8 anim-fade" style="animation-delay:0.55s;">
+            <div class="flex justify-between text-xs text-slate-500 mb-1.5">
+                <span>SPM 2021</span>
+                <span id="progressPct">0%</span>
+                <span>Departure</span>
+            </div>
+            <div class="progress-track">
+                <div id="progressBar" class="progress-fill" style="width:0%;"></div>
+            </div>
+        </div>
+
+        <!-- Landed message -->
+        <div id="landed" class="hidden text-center mt-8">
+            <div class="text-5xl mb-3">🇯🇵</div>
+            <h2 class="font-display text-3xl md:text-5xl font-bold mb-2" style="color:#FFB7C5;">It's Time!</h2>
+            <p class="text-slate-400 text-lg">Have an amazing trip 🌸</p>
+        </div>
+
+        <footer class="mt-14 text-slate-600 text-sm anim-fade" style="animation-delay:0.65s;">
+            ⛩️ JEPUN LETSGOOOOOOO
+        </footer>
+    </main>
+
+    <script>
+        // 3 Sep 2026 1:00 PM MYT = 3 Sep 2026 05:00:00 UTC
+        var TARGET = new Date('2026-09-03T05:00:00Z').getTime();
+        var START   = new Date('2021-01-01T00:00:00Z').getTime();
+
+        var $days = document.getElementById('days');
+        var $hrs  = document.getElementById('hours');
+        var $mins = document.getElementById('minutes');
+        var $secs = document.getElementById('seconds');
+        var $bar  = document.getElementById('progressBar');
+        var $pct  = document.getElementById('progressPct');
+        var $cd   = document.getElementById('countdown');
+        var $land = document.getElementById('landed');
+
+        function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+        function tick() {
+            var now  = Date.now();
+            var diff = TARGET - now;
+
+            if (diff <= 0) {
+                $days.textContent = '00';
+                $hrs.textContent  = '00';
+                $mins.textContent = '00';
+                $secs.textContent = '00';
+                $bar.style.width  = '100%';
+                $pct.textContent  = '100%';
+                $cd.style.opacity = '0.3';
+                $land.classList.remove('hidden');
+                return;
+            }
+
+            var d = Math.floor(diff / 86400000);
+            var h = Math.floor((diff / 3600000) % 24);
+            var m = Math.floor((diff / 60000) % 60);
+            var s = Math.floor((diff / 1000) % 60);
+
+            $days.textContent = pad(d);
+            $hrs.textContent  = pad(h);
+            $mins.textContent = pad(m);
+            $secs.textContent = pad(s);
+
+            var total   = TARGET - START;
+            var elapsed = now - START;
+            var pct     = Math.min(100, Math.max(0, (elapsed / total) * 100));
+            $bar.style.width = pct.toFixed(2) + '%';
+            $pct.textContent  = pct.toFixed(1) + '%';
+        }
+
+        tick();
+        setInterval(tick, 1000);
+
+        // Petals
+        (function() {
+            var box = document.getElementById('petals');
+            for (var i = 0; i < 12; i++) {
+                var el = document.createElement('div');
+                el.className = 'petal';
+                var size = 8 + Math.random() * 8;
+                el.style.width  = size + 'px';
+                el.style.height = size + 'px';
+                el.style.left   = (Math.random() * 100) + 'vw';
+                el.style.opacity = (0.15 + Math.random() * 0.25).toFixed(2);
+                el.style.animationDuration = (8 + Math.random() * 10) + 's';
+                el.style.animationDelay    = (Math.random() * 8) + 's';
+                box.appendChild(el);
+            }
+        })();
+    </script>
+</body>
+</html>
